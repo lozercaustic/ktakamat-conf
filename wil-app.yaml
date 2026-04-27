@@ -16,13 +16,15 @@ spec:
         app: wil-app
     spec:
       containers:
-      - image: wil42/playground:v3
+      - image: paulbouwer/hello-kubernetes:1.10
         name: wil-app
         ports:
           - name: http
-            containerPort: 8888
+            containerPort: 8080
             protocol: TCP
-        resources: {}
+        env:
+          - name: MESSAGE
+            value: "Hello from app1"
 status: {}
 ---
 apiVersion: v1
@@ -36,7 +38,7 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 8888
+      targetPort: 8080
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
