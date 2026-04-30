@@ -5,7 +5,7 @@ metadata:
     app: wil-app
   name: wil-app
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: wil-app
@@ -16,15 +16,13 @@ spec:
         app: wil-app
     spec:
       containers:
-      - image: paulbouwer/hello-kubernetes:1.10
+      - image: wil42/playground:v1
         name: wil-app
         ports:
           - name: http
-            containerPort: 8080
+            containerPort: 8888
             protocol: TCP
-        env:
-          - name: MESSAGE
-            value: "Hello from app1"
+        resources: {}
 status: {}
 ---
 apiVersion: v1
@@ -38,7 +36,7 @@ spec:
     - name: http
       port: 80
       protocol: TCP
-      targetPort: 8080
+      targetPort: 8888
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
